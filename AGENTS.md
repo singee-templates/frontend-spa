@@ -19,7 +19,7 @@ Testing uses Vitest:
 - `pnpm test` runs `vitest run` via `vitest.config.ts` (intentionally isolated from the app's `vite.config.ts` plugins).
 - `pnpm test --watch` runs Vitest in watch mode.
 - `pnpm test:browser` runs Browser Mode component tests (Playwright provider) via `vitest.browser.config.ts`.
-- The default test environment is `node` (use `// @vitest-environment jsdom` for React component tests).
+- The default test environment is `node`. For React component tests, prefer Browser Mode (`pnpm test:browser`) and name files `*.browser.test.tsx` / `*.browser.spec.tsx`.
 
 Browser Mode notes:
 

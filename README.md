@@ -11,7 +11,7 @@ A modern, production-ready React template with Mantine UI, TanStack Start, and T
 - **📊 TanStack Table** - Headless table utilities for building powerful tables
 - **⚡ Vite** - Lightning fast build tool with HMR
 - **🔷 TypeScript** - Full type safety and IntelliSense support
-- **🎭 Vitest** - Fast unit testing with React Testing Library
+- **🎭 Vitest** - Fast unit testing (Node environment) + Browser Mode component tests (Playwright)
 - **💅 PostCSS** - Advanced CSS processing with Mantine preset
 - **📝 ESLint & Prettier** - Code quality and formatting
 - **🔄 GitHub Actions** - CI/CD pipeline ready
@@ -174,7 +174,12 @@ import { MyComponent } from '~components/MyComponent';
 
 ## 🧪 Testing
 
-Vitest is configured in `vitest.config.ts` and is intentionally kept separate from the app's `vite.config.ts` (so unit tests don't load TanStack Start / Nitro plugins).
+This template supports **two Vitest modes**:
+
+- **Unit tests (Node environment)** via `pnpm test` (config: `vitest.config.ts`)
+- **Component tests (Browser Mode)** via `pnpm test:browser` (config: `vitest.browser.config.ts`)
+
+Vitest is intentionally kept separate from the app's `vite.config.ts` (so unit tests don't load TanStack Start / Nitro plugins).
 
 ### Pure logic unit tests (default)
 
@@ -195,37 +200,14 @@ describe('sum', () => {
 });
 ```
 
-### React component tests (optional)
+### React component tests
 
-If you want to test React components, use `jsdom` for those tests.
-
-```tsx
-// @vitest-environment jsdom
-
-// src/components/Button.test.tsx
-import { render, screen } from '@testing-library/react';
-import { Button } from './Button';
-
-test('renders button', () => {
-  render(<Button>Click me</Button>);
-  expect(screen.getByText('Click me')).toBeInTheDocument();
-});
-```
-
-Run tests:
-
-```bash
-pnpm test          # Run once
-pnpm test --watch  # Watch mode
-```
-
-### Browser Mode component tests (Playwright)
-
-This template also supports Vitest Browser Mode (Playwright provider) for higher-fidelity component tests.
+For React components, prefer **Vitest Browser Mode** for higher-fidelity tests (real browser via Playwright).
 
 - Config: `vitest.browser.config.ts`
 - Setup: `vitest.browser.setup.ts`
 - File pattern: `src/**/*.browser.{test,spec}.{ts,tsx}`
+- Example: `src/components/demo/share.browser.test.tsx`
 
 Run Browser Mode tests:
 
