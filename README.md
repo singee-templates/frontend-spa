@@ -113,8 +113,9 @@ const secretKey = process.env.SECRET_KEY;
 | `pnpm dev`          | Start development server on port 3000 |
 | `pnpm build`        | Build for production                  |
 | `pnpm preview`      | Preview production build              |
-| `pnpm test`         | Run tests                             |
+| `pnpm test`         | Run all tests (unit + browser)        |
 | `pnpm test --watch` | Run tests in watch mode               |
+| `pnpm test:unit`    | Run unit tests (Node environment)     |
 | `pnpm test:browser` | Run Browser Mode component tests      |
 | `pnpm lint`         | Run ESLint                            |
 | `pnpm format`       | Format code with Prettier and ESLint  |
@@ -174,10 +175,11 @@ import { MyComponent } from '~components/MyComponent';
 
 ## 🧪 Testing
 
-This template supports **two Vitest modes**:
+This template supports **two Vitest modes** (configured via `vitest.config.ts` using `test.projects`):
 
-- **Unit tests (Node environment)** via `pnpm test` (config: `vitest.config.ts`)
-- **Component tests (Browser Mode)** via `pnpm test:browser` (config: `vitest.browser.config.ts`)
+- **Unit tests (Node environment)** via `pnpm test:unit` (`unit` project)
+- **Component tests (Browser Mode)** via `pnpm test:browser` (`browser` project)
+- **Run everything** via `pnpm test`
 
 Vitest is intentionally kept separate from the app's `vite.config.ts` (so unit tests don't load TanStack Start / Nitro plugins).
 
@@ -204,7 +206,7 @@ describe('sum', () => {
 
 For React components, prefer **Vitest Browser Mode** for higher-fidelity tests (real browser via Playwright).
 
-- Config: `vitest.browser.config.ts`
+- Config: `vitest.config.ts` (`browser` project)
 - Setup: `vitest.browser.setup.ts`
 - File pattern: `src/**/*.browser.{test,spec}.{ts,tsx}`
 - Example: `src/components/demo/share.browser.test.tsx`
