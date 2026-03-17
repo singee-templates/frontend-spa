@@ -1,134 +1,81 @@
-# Frontend Template
+# Frontend SPA Template
 
-A modern, production-ready React template with Mantine UI, TanStack Start, and TypeScript. Perfect for building full-stack web applications with server-side rendering, beautiful UI components, and type-safe routing.
+A production-ready React template built with Mantine, TanStack Router, and Vite. The app is shipped as a static single-page application: `pnpm build` generates deployable assets in `dist/` without any server runtime.
 
-## ✨ Features
+## Features
 
-- **🎨 Mantine v8** - A full-featured React components library with 100+ customizable components
-- **🚀 TanStack Start** - Full-stack React framework with SSR and file-based routing
-- **📦 TanStack Router** - Type-safe routing with automatic code splitting
-- **🔄 TanStack Query** - Powerful data fetching and caching
-- **📊 TanStack Table** - Headless table utilities for building powerful tables
-- **⚡ Vite** - Lightning fast build tool with HMR
-- **🔷 TypeScript** - Full type safety and IntelliSense support
-- **🎭 Vitest** - Fast unit testing (Node environment) + Browser Mode component tests (Playwright)
-- **💅 PostCSS** - Advanced CSS processing with Mantine preset
-- **📝 ESLint & Prettier** - Code quality and formatting
-- **🔄 GitHub Actions** - CI/CD pipeline ready
-- **🎯 Path Aliases** - Clean imports with `~` prefix
-- **🌐 SSR Ready** - Server-side rendering with Nitro
-- **🔔 Sonner** - Beautiful toast notifications
-- **📋 Zod v4** - TypeScript-first schema validation
-- **📅 Day.js** - Lightweight date manipulation
-- **🎨 Tabler Icons** - Beautiful SVG icons
+- React 19 + TypeScript
+- Mantine v8 UI components and theming
+- TanStack Router with file-based routing
+- TanStack Query for server-state management
+- TanStack Table for complex data grids
+- Vite for development and production builds
+- Vitest unit tests and Browser Mode component tests
+- ESLint + Prettier
+- Sonner toast notifications
+- Zod v4 for validation
+- Day.js for date utilities
 
-## 🚀 Quick Start
-
-### Use this template
-
-Click the "Use this template" button above or use the GitHub CLI:
-
-```bash
-gh repo create my-app --template singee-templates/frontend
-```
-
-Read the docs dir for more information. (You can safely delete this README.md file and docs directory after cloning as they are not needed for your project.)
+## Quick Start
 
 ### Prerequisites
 
 - Node.js >= 22
 - pnpm 10+
 
-### Local Development
-
-1. **Clone and install dependencies:**
+### Install and run
 
 ```bash
-git clone https://github.com/your-username/your-repo.git
-cd your-repo
 pnpm install
-```
-
-2. **Start development server:**
-
-```bash
 pnpm dev
 ```
 
-Visit [http://localhost:3000](http://localhost:3000) to see your app.
+Visit [http://localhost:3000](http://localhost:3000).
 
-## 📁 Project Structure
+## Available Scripts
 
-```
+| Script              | Description                                     |
+| ------------------- | ----------------------------------------------- |
+| `pnpm dev`          | Start the Vite dev server on port 3000          |
+| `pnpm build`        | Build the static production bundle into `dist/` |
+| `pnpm preview`      | Serve the production bundle locally with Vite   |
+| `pnpm test`         | Run all Vitest projects                         |
+| `pnpm test:unit`    | Run the `unit` Vitest project                   |
+| `pnpm test:browser` | Run the Browser Mode Vitest project             |
+| `pnpm lint`         | Run ESLint                                      |
+| `pnpm format`       | Run Prettier and ESLint auto-fixes              |
+| `pnpm check:types`  | Run `tsc --noEmit`                              |
+
+## Project Structure
+
+```text
 .
+├── index.html                # Vite HTML entry
+├── public/                   # Static files copied to dist/
 ├── src/
-│   ├── components/         # Shared React components
-│   │   ├── demo/           # Example components (safe to delete)
-│   │   └── system/         # System components (404, etc.)
-│   ├── routes/             # File-based routing
-│   │   ├── __root.tsx      # Root layout
-│   │   ├── index.tsx       # Home page (show demo components currently)
-│   │   └── 404.tsx         # 404 page
-│   ├── ui/                 # Design system and themes
-│   ├── router.tsx          # Router configuration
-│   ├── routeTree.gen.ts    # Auto-generated route tree (do not edit manually)
-│   └── styles.css          # Global styles
-├── public/                 # Static assets
-├── .ai/                    # AI documentation for development
-├── .github/                # GitHub templates and workflows
-├── AGENTS.md               # AI assistant guidelines
-└── CLAUDE.md               # Symlink to AGENTS.md
+│   ├── components/           # Shared React components
+│   ├── routes/               # File-based TanStack Router routes
+│   │   ├── __root.tsx        # Root layout and providers
+│   │   ├── index.tsx         # Landing page
+│   │   └── 404.tsx           # 404 route
+│   ├── ui/                   # Theme definitions and UI primitives
+│   ├── main.tsx              # React entry point
+│   ├── router.tsx            # Router and QueryClient setup
+│   ├── routeTree.gen.ts      # Generated route tree (do not edit)
+│   └── styles.css            # Global styles
+├── docs/
+│   └── spa-mode.md           # Static deployment notes
+├── AGENTS.md                 # AI assistant guidelines
+└── vite.config.ts            # Vite + TanStack Router plugin config
 ```
 
-## 🔐 Environment Configuration
+## Routing
 
-This template uses environment variables for configuration. Here's how the environment files work:
+This template uses `@tanstack/router-plugin/vite` for file-based routing. Route modules live in `src/routes/`, and the generated `src/routeTree.gen.ts` file is refreshed automatically during `pnpm dev` and `pnpm build`.
 
-### Files Overview
-
-| File           | Purpose                                                             | Git tracked |
-| -------------- | ------------------------------------------------------------------- | ----------- |
-| `.env.example` | Template file with all available environment variables              | Yes         |
-| `.env`         | Your local environment variables with actual values                 | No          |
-| `.envrc`       | [direnv](https://direnv.net/) configuration for auto-loading `.env` | Yes         |
-
-### Usage in Code
-
-In client code, you need to use vite's `import.meta.env` to access environment variables, and in server code, you should use `process.env`.
+Example route:
 
 ```tsx
-// Client-side (must be prefixed with VITE_)
-const apiUrl = import.meta.env.VITE_API_URL;
-
-// Server-side (in loaders, actions, etc.)
-const secretKey = process.env.SECRET_KEY;
-```
-
-> **Note:** Only variables prefixed with `VITE_` are exposed to the client-side code. Keep sensitive values without this prefix.
-
-## 📦 Available Scripts
-
-| Script              | Description                           |
-| ------------------- | ------------------------------------- |
-| `pnpm dev`          | Start development server on port 3000 |
-| `pnpm build`        | Build for production                  |
-| `pnpm preview`      | Preview production build              |
-| `pnpm test`         | Run all tests (unit + browser)        |
-| `pnpm test --watch` | Run tests in watch mode               |
-| `pnpm test:unit`    | Run unit tests (Node environment)     |
-| `pnpm test:browser` | Run Browser Mode component tests      |
-| `pnpm lint`         | Run ESLint                            |
-| `pnpm format`       | Format code with Prettier and ESLint  |
-| `pnpm check:types`  | Type check with TypeScript            |
-
-## 🛠️ Development
-
-### Adding a New Route
-
-Create a new file in `src/routes/`:
-
-```tsx
-// src/routes/about.tsx
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/about')({
@@ -136,138 +83,57 @@ export const Route = createFileRoute('/about')({
 });
 
 function AboutPage() {
-  return (
-    <Container>
-      <Title>About Us</Title>
-    </Container>
-  );
+  return <div>About</div>;
 }
 ```
 
-### Using Mantine Components
+## Environment Variables
+
+Use Vite environment variables through `import.meta.env`:
 
 ```tsx
-import { Button, Card, Text } from '@mantine/core';
-
-function MyComponent() {
-  return (
-    <Card>
-      <Text>Hello from Mantine!</Text>
-      <Button variant="filled">Click me</Button>
-    </Card>
-  );
-}
+const apiUrl = import.meta.env.VITE_API_URL;
 ```
 
-### Custom Components
+Only variables prefixed with `VITE_` are exposed to client-side code. Put local secrets and overrides in `.env.local`.
 
-Place custom components in `src/components/`:
+## Testing
 
-```tsx
-// src/components/MyComponent.tsx
-export function MyComponent() {
-  return <div>My Custom Component</div>;
-}
+Vitest is configured with two projects in `vitest.config.ts`:
 
-// Import with path alias
-import { MyComponent } from '~components/MyComponent';
-```
+- `unit`: Node environment for pure logic tests
+- `browser`: Browser Mode with Playwright for React component tests
 
-## 🧪 Testing
-
-This template supports **two Vitest modes** (configured via `vitest.config.ts` using `test.projects`):
-
-- **Unit tests (Node environment)** via `pnpm test:unit` (`unit` project)
-- **Component tests (Browser Mode)** via `pnpm test:browser` (`browser` project)
-- **Run everything** via `pnpm test`
-
-Vitest is intentionally kept separate from the app's `vite.config.ts` (so unit tests don't load TanStack Start / Nitro plugins).
-
-### Pure logic unit tests (default)
-
-The default test environment is `node`.
-
-Write tests next to the code:
-
-```tsx
-// src/utils/sum.test.ts
-import { describe, expect, it } from 'vitest';
-
-import { sum } from './sum';
-
-describe('sum', () => {
-  it('adds numbers', () => {
-    expect(sum(1, 2)).toBe(3);
-  });
-});
-```
-
-### React component tests
-
-For React components, prefer **Vitest Browser Mode** for higher-fidelity tests (real browser via Playwright).
-
-- Config: `vitest.config.ts` (`browser` project)
-- Setup: `vitest.browser.setup.ts`
-- File pattern: `src/**/*.browser.{test,spec}.{ts,tsx}`
-- Example: `src/components/demo/share.browser.test.tsx`
-
-Run Browser Mode tests:
-
-```bash
-pnpm test:browser
-```
-
-If Chromium is not installed yet:
+Browser test files should match `src/**/*.browser.{test,spec}.{ts,tsx}`. If Chromium is missing locally, run:
 
 ```bash
 pnpm exec playwright install chromium
 ```
 
-## 🚀 Deployment
+## Build and Deploy
 
-### Build for Production
+Build the app:
 
 ```bash
 pnpm build
 ```
 
-### Deploy
+The output in `dist/` contains only static assets such as:
 
-Please see the official [Hosting](https://tanstack.com/start/latest/docs/framework/react/guide/hosting) documentation of tanstack-start.
+- `index.html`
+- JavaScript and CSS chunks in `dist/assets/`
+- Files copied from `public/`
 
-## 🤖 AI Development
+Deploy `dist/` to any static host. Because routing is client-side, configure your host to rewrite non-asset requests to `/index.html`.
 
-This template is optimized for AI-assisted development:
-
-- **AGENTS.md** (and symlinked **CLAUDE.md**) - Guidelines for AI assistants
-- **.ai/** - Comprehensive documentation for frameworks (for AI)
-- **Type Safety** - Full TypeScript support for better AI suggestions
-- **Clear Structure** - Well-organized code for easy understanding
-
-## 📚 Documentation
+## Documentation
 
 - [Mantine Documentation](https://mantine.dev/)
-- [TanStack Start Documentation](https://tanstack.com/start/latest)
 - [TanStack Router Documentation](https://tanstack.com/router/latest)
+- [TanStack Query Documentation](https://tanstack.com/query/latest)
 - [Vite Documentation](https://vitejs.dev/)
 - [Vitest Documentation](https://vitest.dev/)
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [Mantine](https://mantine.dev/) for the amazing component library
-- [TanStack](https://tanstack.com/) for the powerful routing and state management tools
-- [Vite](https://vitejs.dev/) for the blazing fast build tool
-
-## 💬 Support
-
-- Create an [Issue](https://github.com/singee-templates/frontend/issues) for bug reports
-- Start a [Discussion](https://github.com/singee-templates/frontend/discussions) for questions
-- Check [AGENTS.md](./AGENTS.md) for AI development guidelines
-
----
-
-Built with ❤️ using Mantine and TanStack Start
+This project is licensed under the MIT License. See [LICENSE](LICENSE).

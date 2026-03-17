@@ -33,8 +33,6 @@ export default [
   {
     ignores: [
       '.ai',
-      '.nitro',
-      '.output',
       '.tanstack',
       'dist',
       'node_modules',

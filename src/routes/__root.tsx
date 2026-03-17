@@ -1,17 +1,16 @@
 import {
   HeadContent,
-  Scripts,
+  Outlet,
   createRootRouteWithContext,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import { Toaster } from 'sonner';
 import { NavigationProgress } from '@mantine/nprogress';
 import { ModalsProvider } from '@mantine/modals';
 import type { QueryClient } from '@tanstack/react-query';
-import appCss from '~styles.css?url';
 import { appCssVariablesResolver, appTheme } from '~ui/theme';
 
 export const Route = createRootRouteWithContext<{
@@ -20,52 +19,35 @@ export const Route = createRootRouteWithContext<{
   head: () => ({
     meta: [
       {
-        charSet: 'utf-8',
-      },
-      {
-        name: 'viewport',
-        content: 'width=device-width, initial-scale=1',
-      },
-      {
-        title: 'TanStack Start Starter',
-      },
-    ],
-    links: [
-      {
-        rel: 'stylesheet',
-        href: appCss,
+        title: 'Frontend SPA Template',
       },
     ],
   }),
-
-  shellComponent: RootDocument,
+  component: RootLayout,
 });
 
-function RootDocument({ children }: { children: React.ReactNode }) {
+function RootLayout() {
   return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-        <ColorSchemeScript defaultColorScheme="light" />
-      </head>
-      <body>
-        <MantineProvider
-          theme={appTheme}
-          cssVariablesResolver={appCssVariablesResolver}
-          defaultColorScheme="light"
-        >
-          <ModalsProvider>{children}</ModalsProvider>
+    <>
+      <HeadContent />
+      <MantineProvider
+        theme={appTheme}
+        cssVariablesResolver={appCssVariablesResolver}
+        defaultColorScheme="light"
+      >
+        <ModalsProvider>
+          <Outlet />
+        </ModalsProvider>
 
-          <Toaster position="top-center" richColors />
-          <NavigationProgress />
-        </MantineProvider>
+        <Toaster position="top-center" richColors />
+        <NavigationProgress />
         <TanStackDevtools
           config={{
             position: 'bottom-right',
           }}
           plugins={[
             {
-              name: 'Tanstack Router',
+              name: 'TanStack Router',
               render: <TanStackRouterDevtoolsPanel />,
             },
             {
@@ -74,8 +56,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
             },
           ]}
         />
-        <Scripts />
-      </body>
-    </html>
+      </MantineProvider>
+    </>
   );
 }

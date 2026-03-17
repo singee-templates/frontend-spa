@@ -4,19 +4,19 @@ This file provides guidance to AI Code Agent when working with code in this repo
 
 ## Project Structure & Module Organization
 
-Source lives in `src/`. Global routing is defined in `src/router.tsx`, with route modules in `src/routes` (`__root.tsx` for layout, `index.tsx` for the landing page). Shared UI composites belong in `src/components`, design primitives in `src/ui`. Styling overrides sit in `src/styles.css`. Static files stay in `public/`, and production artifacts are written to `dist/` and `.output/`. Colocate new feature assets with the component or route that consumes them to keep dependencies obvious.
+Source lives in `src/`. The Vite entry is `src/main.tsx`, global routing is defined in `src/router.tsx`, and route modules live in `src/routes` (`__root.tsx` for layout, `index.tsx` for the landing page). Shared UI composites belong in `src/components`, design primitives in `src/ui`, and styling overrides sit in `src/styles.css`. Static files stay in `public/`, while the deployable static build is written to `dist/`. Colocate new feature assets with the component or route that consumes them to keep dependencies obvious.
 
 - UI: Mantine v8. Use the context7 MCP tool with the library id `/mantine/mantine` to load docs.
-- Routing: TanStack Start/Router. Use context7 with `/websites/tanstack_com-start-latest` for Start docs and `/websites/tanstack_router` for Router docs.
-- Generated files like `routeTree.gen.ts` are auto-created; do not edit.
+- Routing: TanStack Router. Use context7 with `/websites/tanstack_router` for Router docs.
+- Generated files like `routeTree.gen.ts` are auto-created by `@tanstack/router-plugin`; do not edit.
 
 ## Build & Development Commands
 
-Use pnpm for everything. `pnpm dev` starts the Vite dev server on port 3000 with hot reload. `pnpm build` emits the optimized bundle into `.output/`, while `pnpm preview` runs the Nitro server from `.output/` to sanity-check SSR. `pnpm check:types` runs `tsc --noEmit`. `pnpm lint` applies the TanStack + React ESLint rules, and `pnpm format` runs Prettier then auto-fixes lint errors.
+Use pnpm for everything. `pnpm dev` starts the Vite dev server on port 3000 with hot reload. `pnpm build` emits the optimized static site into `dist/`, while `pnpm preview` serves `dist/` through Vite Preview to sanity-check the production bundle. `pnpm check:types` runs `tsc --noEmit`. `pnpm lint` applies the TanStack + React ESLint rules, and `pnpm format` runs Prettier then auto-fixes lint errors.
 
 Dependency upgrade policy:
 
-- Keep `@types/node`, `eslint`, and `nitro` at their current versions.
+- Keep `@types/node` and `eslint` at their current versions.
 - Do not upgrade them unless explicitly requested.
 
 Testing uses Vitest:
@@ -86,13 +86,9 @@ Secrets belong in `.env.local` (gitignored); reference them through Vite's `impo
 
 The project uses [Mantine](https://mantine.dev/) v8 for UI components. Use the context7 MCP tool with the library id `/mantine/mantine` to load (or search) docs.
 
-### Tanstack Start
-
-The project uses [Tanstack Start](https://tanstack.com/start/latest/docs/) for routing. Use the context7 MCP tool with the library id `/websites/tanstack_com-start-latest` to load (or search) docs.
-
 ### Tanstack Router
 
-Tanstack Start uses the Tanstack Router under the hood. Use the context7 MCP tool with the library id `/websites/tanstack_router` to load (or search) docs.
+The project uses [TanStack Router](https://tanstack.com/router/latest) with the Vite plugin for file-based routing. Use the context7 MCP tool with the library id `/websites/tanstack_router` to load (or search) docs.
 
 ### @mantine/hooks
 

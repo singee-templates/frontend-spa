@@ -342,7 +342,7 @@
 /* NavLink */
 .mantine-NavLink-root {
   /* Override Mantine's default [aria-current='page'] active styling */
-  /* tanstack-start sets aria-current="page" on all /dashboard links under /dashboard/* */
+  /* TanStack Router can set aria-current="page" on route-aware links */
   /* We only want active styling controlled by the `active` prop (data-active attribute) */
   &:where([aria-current='page']:not([data-active])) {
     background-color: transparent;
