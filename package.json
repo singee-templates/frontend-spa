@@ -31,7 +31,7 @@
     "@mantine/spotlight": "^8.3.18",
     "@tabler/icons-react": "^3.40.0",
     "@tanstack/react-query": "^5.90.21",
-    "@tanstack/react-router": "^1.167.4",
+    "@tanstack/react-router": "^1.168.8",
     "@tanstack/react-table": "^8.21.3",
     "@tanstack/router-plugin": "^1.166.13",
     "copy-to-clipboard": "^3.3.3",
