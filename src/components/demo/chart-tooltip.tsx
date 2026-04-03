@@ -2,9 +2,9 @@ import { Paper, Text } from '@mantine/core';
 
 interface ChartTooltipProps {
   label?: string;
-  payload?: Array<{
-    name: string;
-    value: number;
+  payload?: ReadonlyArray<{
+    name?: string | number;
+    value?: string | number | ReadonlyArray<string | number>;
     color?: string;
   }>;
 }
@@ -19,7 +19,7 @@ export function ChartTooltip({ label, payload }: ChartTooltipProps) {
       </Text>
       {payload.map((item, index) => (
         <Text key={index} size="xs" c="dimmed">
-          {item.name}: {item.value}
+          {String(item.name ?? '')}: {String(item.value ?? '')}
         </Text>
       ))}
     </Paper>
