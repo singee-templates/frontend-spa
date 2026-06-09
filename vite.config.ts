@@ -5,6 +5,9 @@ import { devtools } from '@tanstack/devtools-vite';
 
 const config = defineConfig({
   resolve: {
+    alias: {
+      tslib: 'tslib/tslib.es6.mjs',
+    },
     tsconfigPaths: true,
   },
   plugins: [
