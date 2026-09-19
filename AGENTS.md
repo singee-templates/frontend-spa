@@ -6,7 +6,7 @@ This file provides guidance to AI Code Agent when working with code in this repo
 
 Source lives in `src/`. The Vite entry is `src/main.tsx`, global routing is defined in `src/router.tsx`, and route modules live in `src/routes` (`__root.tsx` for layout, `index.tsx` for the landing page). Shared UI composites belong in `src/components`, design primitives in `src/ui`, and styling overrides sit in `src/styles.css`. Static files stay in `public/`, while the deployable static build is written to `dist/`. Colocate new feature assets with the component or route that consumes them to keep dependencies obvious.
 
-- UI: Mantine v8. Use the context7 MCP tool with the library id `/mantine/mantine` to load docs.
+- UI: Mantine v9. Use the context7 MCP tool with the library id `/mantine/mantine` to load docs.
 - Routing: TanStack Router. Use context7 with `/websites/tanstack_router` for Router docs.
 - Generated files like `routeTree.gen.ts` are auto-created by `@tanstack/router-plugin`; do not edit.
 
@@ -16,8 +16,7 @@ Use pnpm for everything. `pnpm dev` starts the Vite dev server on port 3000 with
 
 Dependency upgrade policy:
 
-- Keep `@types/node` at its current version.
-- Do not upgrade them unless explicitly requested.
+- Keep `@types/node` on the latest `26.x` release; do not switch to another major version.
 
 Testing uses Vitest:
 
@@ -85,7 +84,7 @@ Secrets belong in `.env.local` (gitignored); reference them through Vite's `impo
 
 ### Mantine
 
-The project uses [Mantine](https://mantine.dev/) v8 for UI components. Use the context7 MCP tool with the library id `/mantine/mantine` to load (or search) docs.
+The project uses [Mantine](https://mantine.dev/) v9 for UI components. Use the context7 MCP tool with the library id `/mantine/mantine` to load (or search) docs.
 
 ### Tanstack Router
 

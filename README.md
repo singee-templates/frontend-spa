@@ -5,13 +5,13 @@ A production-ready React template built with Mantine, TanStack Router, and Vite.
 ## Features
 
 - React 19 + TypeScript
-- Mantine v8 UI components and theming
+- Mantine v9 UI components and theming
 - TanStack Router with file-based routing
 - TanStack Query for server-state management
 - TanStack Table for complex data grids
 - Vite for development and production builds
 - Vitest unit tests and Browser Mode component tests
-- ESLint + Prettier
+- Oxlint + Oxfmt
 - Sonner toast notifications
 - Zod v4 for validation
 - Day.js for date utilities
@@ -20,7 +20,7 @@ A production-ready React template built with Mantine, TanStack Router, and Vite.
 
 ### Prerequisites
 
-- Node.js >= 22
+- Node.js 22.12+ (22.x), 24.x, or 26+
 - pnpm 10+
 
 ### Install and run
@@ -42,8 +42,8 @@ Visit [http://localhost:3000](http://localhost:3000).
 | `pnpm test`         | Run all Vitest projects                         |
 | `pnpm test:unit`    | Run the `unit` Vitest project                   |
 | `pnpm test:browser` | Run the Browser Mode Vitest project             |
-| `pnpm lint`         | Run ESLint                                      |
-| `pnpm format`       | Run Prettier and ESLint auto-fixes              |
+| `pnpm lint`         | Run Oxlint                                      |
+| `pnpm format`       | Run Oxfmt and Oxlint auto-fixes                 |
 | `pnpm check:types`  | Run `tsc --noEmit`                              |
 
 ## Project Structure
